@@ -5,21 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Revisión de Limpieza</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #EEF3F2;
+    --bg: #F7F8F9;
     --card: #FFFFFF;
     --ink: #16302F;
-    --ink-soft: #4B6664;
+    --ink-soft: #6B7280;
+    --border: #E7E9EC;
     --teal: #1F6F6B;
-    --teal-dark: #164F4C;
-    --gold: #E3A008;
-    --green: #2F9E44;
-    --amber: #E8912B;
-    --red: #D8483A;
-    --border: #DCE6E4;
-    --radius: 14px;
+    --radius: 16px;
   }
   *{box-sizing:border-box;}
   body{
@@ -30,42 +25,39 @@
     -webkit-font-smoothing:antialiased;
     padding-bottom:60px;
   }
+
   header{
-    background:var(--teal);
-    color:#fff;
-    padding:22px 20px 26px;
-    border-radius:0 0 22px 22px;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    padding:18px 20px;
   }
   header h1{
     font-family:'Space Grotesk',sans-serif;
-    font-size:1.5rem;
-    margin:0 0 4px;
+    font-size:1.25rem;
+    margin:0 0 2px;
   }
-  header p{margin:0;color:#D9EDEA;font-size:0.9rem;}
+  header p{margin:0;color:var(--ink-soft);font-size:0.85rem;}
 
   .tabs{
     display:flex;
-    gap:8px;
+    gap:22px;
     max-width:640px;
-    margin:16px auto 0;
-    padding:0 16px;
+    margin:0 auto;
+    padding:0 20px;
+    background:#fff;
+    border-bottom:1px solid var(--border);
   }
   .tab{
-    flex:1;
-    text-align:center;
-    padding:10px 8px;
-    border-radius:999px;
-    background:var(--card);
-    border:1px solid var(--border);
+    padding:12px 2px;
+    font-size:0.88rem;
     font-weight:600;
-    font-size:0.85rem;
     color:var(--ink-soft);
     cursor:pointer;
+    border-bottom:2px solid transparent;
   }
   .tab.active{
-    background:var(--teal-dark);
-    color:#fff;
-    border-color:var(--teal-dark);
+    color:var(--teal);
+    border-bottom-color:var(--teal);
   }
 
   main{
@@ -77,62 +69,87 @@
   .empty{
     text-align:center;
     color:var(--ink-soft);
-    padding:40px 20px;
+    padding:50px 20px;
     font-size:0.95rem;
   }
 
   .card{
     background:var(--card);
     border:1px solid var(--border);
+    border-left:4px solid #CBD5E1;
     border-radius:var(--radius);
-    padding:16px;
-    margin-bottom:14px;
+    padding:16px 18px;
+    margin-bottom:12px;
+    box-shadow:0 1px 2px rgba(16,24,40,0.04);
   }
   .card-top{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
     gap:10px;
+  }
+  .area-tag{
+    display:inline-block;
+    font-size:0.68rem;
+    font-weight:700;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    padding:2px 8px;
+    border-radius:6px;
     margin-bottom:6px;
   }
   .card-top h3{
     margin:0;
     font-family:'Space Grotesk',sans-serif;
-    font-size:1.05rem;
+    font-size:1.02rem;
+    line-height:1.3;
   }
-  .badge{
+  .priority{
     font-size:0.7rem;
-    font-weight:600;
-    padding:3px 9px;
-    border-radius:999px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
     white-space:nowrap;
+    padding-top:2px;
   }
-  .badge.Alta{background:#FBE5E1;color:var(--red);}
-  .badge.Media{background:#FCEFDC;color:var(--amber);}
-  .badge.Baja{background:#E3F1E0;color:var(--green);}
+  .priority.Alta{color:#DC2626;}
+  .priority.Media{color:#D97706;}
+  .priority.Baja{color:#16A34A;}
 
-  .meta{color:var(--ink-soft);font-size:0.82rem;margin:2px 0;}
-  .estado-anterior{font-size:0.8rem;margin-top:6px;color:var(--ink-soft);}
+  .meta-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:var(--ink-soft);
+    font-size:0.82rem;
+    margin-top:8px;
+  }
+  .meta-row svg{flex-shrink:0;}
+  .estado-anterior{color:var(--ink-soft);font-size:0.78rem;margin-top:4px;}
 
   .btns{
     display:flex;
+    flex-wrap:wrap;
     gap:8px;
-    margin-top:12px;
+    margin-top:14px;
   }
   .btn{
-    flex:1;
-    border:none;
-    border-radius:10px;
-    padding:12px 6px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:#fff;
+    border-radius:999px;
+    padding:8px 14px;
     font-weight:600;
-    font-size:0.82rem;
+    font-size:0.8rem;
     cursor:pointer;
-    color:#fff;
+    border:1.5px solid;
   }
-  .btn.bien{background:var(--green);}
-  .btn.problemas{background:var(--amber);}
-  .btn.no-hecho{background:var(--red);}
-  .btn:disabled{opacity:0.5;cursor:default;}
+  .btn.bien{border-color:#BBF0C7;color:#16A34A;}
+  .btn.problemas{border-color:#FBE0A8;color:#D97706;}
+  .btn.no-hecho{border-color:#F6C4BE;color:#DC2626;}
+  .btn.postponer{border-color:var(--border);color:#475569;}
+  .btn:hover{filter:brightness(0.98);}
 
   .form{
     display:none;
@@ -143,7 +160,7 @@
   .form.open{display:block;}
   .form label{
     display:block;
-    font-size:0.8rem;
+    font-size:0.78rem;
     font-weight:600;
     margin-bottom:4px;
     color:var(--ink-soft);
@@ -159,7 +176,7 @@
   }
   .form .confirm-btn{
     width:100%;
-    background:var(--teal-dark);
+    background:var(--teal);
     color:#fff;
     border:none;
     padding:11px;
@@ -176,12 +193,28 @@
     cursor:pointer;
   }
 
+  /* Pasadas (historial) */
+  .past-card{border-left:4px solid #CBD5E1;}
+  .estado-badge{
+    font-size:0.7rem;
+    font-weight:700;
+    padding:3px 9px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .estado-badge.bien{background:#EAF9EE;color:#16A34A;}
+  .estado-badge.problemas{background:#FEF6E7;color:#D97706;}
+  .estado-badge.no-hecho{background:#FDECEA;color:#DC2626;}
+  .estado-badge.pospuesta{background:#F1F5F9;color:#475569;}
+  .persona{font-size:0.82rem;color:var(--ink-soft);margin-top:8px;}
+  .comentario{font-size:0.85rem;color:var(--ink);margin-top:4px;font-style:italic;}
+
   .toast{
     position:fixed;
     bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    background:var(--teal-dark);
+    background:var(--teal);
     color:#fff;
     padding:12px 20px;
     border-radius:999px;
@@ -203,29 +236,49 @@
 
 <header>
   <h1>🧹 Revisión de Limpieza</h1>
-  <p>Marca cómo se hizo cada tarea esta semana</p>
+  <p>Marca cómo se hizo cada tarea</p>
 </header>
 
 <div class="tabs">
-  <div class="tab active" data-tab="pendiente">Pendientes</div>
-  <div class="tab" data-tab="proxima">Próximas (14 días)</div>
-  <div class="tab" data-tab="futura">Todas</div>
+  <div class="tab active" data-tab="proxima">Próximas</div>
+  <div class="tab" data-tab="pendiente">Pendientes</div>
+  <div class="tab" data-tab="pasadas">Pasadas</div>
 </div>
 
 <main id="main">
   <div class="loading">Cargando tareas…</div>
 </main>
 
-<div class="toast" id="toast">Revisión guardada</div>
+<div class="toast" id="toast">Guardado</div>
 
 <script>
 // ============================================================
 // CONFIGURA AQUÍ LA URL DE TU APPS SCRIPT (ver GUIA-INSTALACION.md)
 // ============================================================
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz08sKhtxABnyWWAbgcH6JF6cZgwxcdWtHuoryJUxxVItMIQrvc5SIHIxhee5k0JBg/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyP7BU5SrS2fNxoVZ02FvsnyfnBOSEf9Lli5p8U97HJvXP30TykdML7prVkZdFlCC0J/exec";
+
+const CALENDAR_ICON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>';
+
+// Colores estables por área (para reconocerlas de un vistazo al recorrer el edificio)
+const AREA_PALETTE = [
+  { bg: '#EFF6FF', text: '#1D4ED8' },
+  { bg: '#F5F3FF', text: '#7C3AED' },
+  { bg: '#FDF2F8', text: '#BE185D' },
+  { bg: '#ECFEFF', text: '#0E7490' },
+  { bg: '#EEF2FF', text: '#4338CA' },
+  { bg: '#F1F5F9', text: '#334155' },
+  { bg: '#FDF4FF', text: '#A21CAF' },
+  { bg: '#F0F9FF', text: '#0369A1' }
+];
+function colorForArea(area){
+  let hash = 0;
+  for (let i = 0; i < area.length; i++){ hash = (hash * 31 + area.charCodeAt(i)) >>> 0; }
+  return AREA_PALETTE[hash % AREA_PALETTE.length];
+}
 
 let tareas = [];
-let tabActual = 'pendiente';
+let historial = [];
+let tabActual = 'proxima';
 
 const main = document.getElementById('main');
 const toast = document.getElementById('toast');
@@ -244,6 +297,7 @@ function cargarTareas(){
     .then(function(r){ return r.json(); })
     .then(function(data){
       tareas = data.tareas || [];
+      historial = data.historial || [];
       render();
     })
     .catch(function(){
@@ -252,12 +306,12 @@ function cargarTareas(){
 }
 
 function render(){
-  let lista;
-  if (tabActual === 'futura'){
-    lista = tareas;
-  } else {
-    lista = tareas.filter(function(t){ return t.categoria === tabActual; });
+  if (tabActual === 'pasadas'){
+    renderPasadas();
+    return;
   }
+
+  const lista = tareas.filter(function(t){ return t.categoria === tabActual; });
 
   if (lista.length === 0){
     main.innerHTML = '<div class="empty">No hay tareas en esta lista 🎉</div>';
@@ -278,33 +332,72 @@ function render(){
 }
 
 function renderCard(t){
+  const color = colorForArea(t.area);
   const ultimo = t.ultimaFecha
-    ? 'Última revisión: ' + t.ultimaFecha + (t.ultimoEstado ? ' — ' + t.ultimoEstado : '')
+    ? 'Última: ' + t.ultimaFecha + (t.ultimoEstado ? ' — ' + t.ultimoEstado : '')
     : 'Todavía no se ha revisado';
 
+  const mostrarPostponer = t.categoria === 'proxima';
+
   return (
-    '<div class="card" id="card-' + t.id + '">' +
+    '<div class="card" id="card-' + t.id + '" style="border-left-color:' + color.text + '">' +
       '<div class="card-top">' +
-        '<h3>' + t.tarea + '</h3>' +
-        '<span class="badge ' + t.prioridad + '">' + t.prioridad + '</span>' +
+        '<div>' +
+          '<span class="area-tag" style="background:' + color.bg + ';color:' + color.text + '">' + t.area + '</span>' +
+          '<h3>' + t.tarea + '</h3>' +
+        '</div>' +
+        '<span class="priority ' + t.prioridad + '">' + t.prioridad + '</span>' +
       '</div>' +
-      '<div class="meta">' + t.area + ' · ' + t.frecuencia + '</div>' +
+      '<div class="meta-row">' + CALENDAR_ICON + ' Próxima revisión: ' + t.proximaFecha + ' · ' + t.frecuencia + '</div>' +
       '<div class="estado-anterior">' + ultimo + '</div>' +
       '<div class="btns">' +
-        '<button class="btn bien" data-estado="Bien hecho">✅ Bien hecho</button>' +
-        '<button class="btn problemas" data-estado="Con problemas">⚠️ Con problemas</button>' +
-        '<button class="btn no-hecho" data-estado="No hecho">❌ No hecho</button>' +
+        '<button class="btn bien" data-estado="Bien hecho">✓ Bien hecho</button>' +
+        '<button class="btn problemas" data-estado="Con problemas">! Con problemas</button>' +
+        '<button class="btn no-hecho" data-estado="No hecho">✕ No hecho</button>' +
+        (mostrarPostponer ? '<button class="btn postponer" data-estado="Pospuesta">↻ Postponer</button>' : '') +
       '</div>' +
       '<div class="form" id="form-' + t.id + '">' +
         '<label>Tu nombre</label>' +
         '<input type="text" id="nombre-' + t.id + '" placeholder="Ej: María">' +
         '<label>Comentario (opcional)</label>' +
         '<textarea id="comentario-' + t.id + '" rows="2" placeholder="Detalles si hace falta"></textarea>' +
-        '<button class="confirm-btn" onclick="enviarRevision(\'' + t.id + '\')">Guardar revisión</button>' +
+        '<button class="confirm-btn" onclick="enviarRevision(\'' + t.id + '\')">Guardar</button>' +
         '<span class="cancel" onclick="cerrarFormulario(\'' + t.id + '\')">Cancelar</span>' +
       '</div>' +
     '</div>'
   );
+}
+
+function claseEstado(estado){
+  if (estado === 'Bien hecho') return 'bien';
+  if (estado === 'Con problemas') return 'problemas';
+  if (estado === 'No hecho') return 'no-hecho';
+  return 'pospuesta';
+}
+
+function renderPasadas(){
+  if (historial.length === 0){
+    main.innerHTML = '<div class="empty">Todavía no hay revisiones registradas.</div>';
+    return;
+  }
+
+  main.innerHTML = historial.map(function(h){
+    const color = colorForArea(h.area);
+    return (
+      '<div class="card past-card" style="border-left-color:' + color.text + '">' +
+        '<div class="card-top">' +
+          '<div>' +
+            '<span class="area-tag" style="background:' + color.bg + ';color:' + color.text + '">' + h.area + '</span>' +
+            '<h3>' + h.tarea + '</h3>' +
+          '</div>' +
+          '<span class="estado-badge ' + claseEstado(h.estado) + '">' + h.estado + '</span>' +
+        '</div>' +
+        '<div class="meta-row">' + CALENDAR_ICON + ' ' + h.fecha + '</div>' +
+        '<div class="persona">Revisado por: ' + (h.nombre || '—') + '</div>' +
+        (h.comentario ? '<div class="comentario">“' + h.comentario + '”</div>' : '') +
+      '</div>'
+    );
+  }).join('');
 }
 
 let estadoSeleccionado = {};
@@ -335,7 +428,7 @@ function enviarRevision(id){
     body: JSON.stringify({ tareaId: id, estado: estado, nombre: nombre, comentario: comentario })
   })
   .then(function(){
-    mostrarToast('Revisión guardada ✔');
+    mostrarToast(estado === 'Pospuesta' ? 'Tarea pospuesta' : 'Revisión guardada ✔');
     cargarTareas();
   })
   .catch(function(){
