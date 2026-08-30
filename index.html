@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisión de Limpieza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EEF3F2;
+    --card: #FFFFFF;
+    --ink: #16302F;
+    --ink-soft: #4B6664;
+    --teal: #1F6F6B;
+    --teal-dark: #164F4C;
+    --gold: #E3A008;
+    --green: #2F9E44;
+    --amber: #E8912B;
+    --red: #D8483A;
+    --border: #DCE6E4;
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--teal);
+    color:#fff;
+    padding:22px 20px 26px;
+    border-radius:0 0 22px 22px;
+  }
+  header h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.5rem;
+    margin:0 0 4px;
+  }
+  header p{margin:0;color:#D9EDEA;font-size:0.9rem;}
+
+  .tabs{
+    display:flex;
+    gap:8px;
+    max-width:640px;
+    margin:16px auto 0;
+    padding:0 16px;
+  }
+  .tab{
+    flex:1;
+    text-align:center;
+    padding:10px 8px;
+    border-radius:999px;
+    background:var(--card);
+    border:1px solid var(--border);
+    font-weight:600;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .tab.active{
+    background:var(--teal-dark);
+    color:#fff;
+    border-color:var(--teal-dark);
+  }
+
+  main{
+    max-width:640px;
+    margin:0 auto;
+    padding:18px 16px 40px;
+  }
+
+  .empty{
+    text-align:center;
+    color:var(--ink-soft);
+    padding:40px 20px;
+    font-size:0.95rem;
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px;
+    margin-bottom:14px;
+  }
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .card-top h3{
+    margin:0;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.05rem;
+  }
+  .badge{
+    font-size:0.7rem;
+    font-weight:600;
+    padding:3px 9px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .badge.Alta{background:#FBE5E1;color:var(--red);}
+  .badge.Media{background:#FCEFDC;color:var(--amber);}
+  .badge.Baja{background:#E3F1E0;color:var(--green);}
+
+  .meta{color:var(--ink-soft);font-size:0.82rem;margin:2px 0;}
+  .estado-anterior{font-size:0.8rem;margin-top:6px;color:var(--ink-soft);}
+
+  .btns{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+  }
+  .btn{
+    flex:1;
+    border:none;
+    border-radius:10px;
+    padding:12px 6px;
+    font-weight:600;
+    font-size:0.82rem;
+    cursor:pointer;
+    color:#fff;
+  }
+  .btn.bien{background:var(--green);}
+  .btn.problemas{background:var(--amber);}
+  .btn.no-hecho{background:var(--red);}
+  .btn:disabled{opacity:0.5;cursor:default;}
+
+  .form{
+    display:none;
+    margin-top:12px;
+    border-top:1px solid var(--border);
+    padding-top:12px;
+  }
+  .form.open{display:block;}
+  .form label{
+    display:block;
+    font-size:0.8rem;
+    font-weight:600;
+    margin-bottom:4px;
+    color:var(--ink-soft);
+  }
+  .form input, .form textarea{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-family:inherit;
+    font-size:0.9rem;
+    margin-bottom:10px;
+  }
+  .form .confirm-btn{
+    width:100%;
+    background:var(--teal-dark);
+    color:#fff;
+    border:none;
+    padding:11px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .form .cancel{
+    display:block;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:0.8rem;
+    margin-top:8px;
+    cursor:pointer;
+  }
+
+  .toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--teal-dark);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:999px;
+    font-size:0.9rem;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.25s ease;
+  }
+  .toast.show{opacity:1;}
+
+  .loading{
+    text-align:center;
+    padding:40px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧹 Revisión de Limpieza</h1>
+  <p>Marca cómo se hizo cada tarea esta semana</p>
+</header>
+
+<div class="tabs">
+  <div class="tab active" data-tab="pendiente">Pendientes</div>
+  <div class="tab" data-tab="proxima">Próximas (14 días)</div>
+  <div class="tab" data-tab="futura">Todas</div>
+</div>
+
+<main id="main">
+  <div class="loading">Cargando tareas…</div>
+</main>
+
+<div class="toast" id="toast">Revisión guardada</div>
+
+<script>
+// ============================================================
+// CONFIGURA AQUÍ LA URL DE TU APPS SCRIPT (ver GUIA-INSTALACION.md)
+// ============================================================
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz08sKhtxABnyWWAbgcH6JF6cZgwxcdWtHuoryJUxxVItMIQrvc5SIHIxhee5k0JBg/exec";
+
+let tareas = [];
+let tabActual = 'pendiente';
+
+const main = document.getElementById('main');
+const toast = document.getElementById('toast');
+
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+    tabActual = tab.dataset.tab;
+    render();
+  });
+});
+
+function cargarTareas(){
+  fetch(APPS_SCRIPT_URL)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      tareas = data.tareas || [];
+      render();
+    })
+    .catch(function(){
+      main.innerHTML = '<div class="empty">No se pudieron cargar las tareas. Revisa la conexión o la configuración del enlace.</div>';
+    });
+}
+
+function render(){
+  let lista;
+  if (tabActual === 'futura'){
+    lista = tareas;
+  } else {
+    lista = tareas.filter(function(t){ return t.categoria === tabActual; });
+  }
+
+  if (lista.length === 0){
+    main.innerHTML = '<div class="empty">No hay tareas en esta lista 🎉</div>';
+    return;
+  }
+
+  main.innerHTML = lista.map(renderCard).join('');
+
+  lista.forEach(function(t){
+    const card = document.getElementById('card-' + t.id);
+    if (!card) return;
+    card.querySelectorAll('.btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        abrirFormulario(t.id, btn.dataset.estado);
+      });
+    });
+  });
+}
+
+function renderCard(t){
+  const ultimo = t.ultimaFecha
+    ? 'Última revisión: ' + t.ultimaFecha + (t.ultimoEstado ? ' — ' + t.ultimoEstado : '')
+    : 'Todavía no se ha revisado';
+
+  return (
+    '<div class="card" id="card-' + t.id + '">' +
+      '<div class="card-top">' +
+        '<h3>' + t.tarea + '</h3>' +
+        '<span class="badge ' + t.prioridad + '">' + t.prioridad + '</span>' +
+      '</div>' +
+      '<div class="meta">' + t.area + ' · ' + t.frecuencia + '</div>' +
+      '<div class="estado-anterior">' + ultimo + '</div>' +
+      '<div class="btns">' +
+        '<button class="btn bien" data-estado="Bien hecho">✅ Bien hecho</button>' +
+        '<button class="btn problemas" data-estado="Con problemas">⚠️ Con problemas</button>' +
+        '<button class="btn no-hecho" data-estado="No hecho">❌ No hecho</button>' +
+      '</div>' +
+      '<div class="form" id="form-' + t.id + '">' +
+        '<label>Tu nombre</label>' +
+        '<input type="text" id="nombre-' + t.id + '" placeholder="Ej: María">' +
+        '<label>Comentario (opcional)</label>' +
+        '<textarea id="comentario-' + t.id + '" rows="2" placeholder="Detalles si hace falta"></textarea>' +
+        '<button class="confirm-btn" onclick="enviarRevision(\'' + t.id + '\')">Guardar revisión</button>' +
+        '<span class="cancel" onclick="cerrarFormulario(\'' + t.id + '\')">Cancelar</span>' +
+      '</div>' +
+    '</div>'
+  );
+}
+
+let estadoSeleccionado = {};
+
+function abrirFormulario(id, estado){
+  estadoSeleccionado[id] = estado;
+  document.querySelectorAll('.form').forEach(function(f){ f.classList.remove('open'); });
+  document.getElementById('form-' + id).classList.add('open');
+}
+
+function cerrarFormulario(id){
+  document.getElementById('form-' + id).classList.remove('open');
+}
+
+function enviarRevision(id){
+  const nombre = document.getElementById('nombre-' + id).value.trim();
+  const comentario = document.getElementById('comentario-' + id).value.trim();
+  const estado = estadoSeleccionado[id];
+
+  if (!nombre){
+    alert('Por favor escribe tu nombre antes de guardar.');
+    return;
+  }
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ tareaId: id, estado: estado, nombre: nombre, comentario: comentario })
+  })
+  .then(function(){
+    mostrarToast('Revisión guardada ✔');
+    cargarTareas();
+  })
+  .catch(function(){
+    alert('No se pudo guardar. Revisa tu conexión e inténtalo de nuevo.');
+  });
+}
+
+function mostrarToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+}
+
+cargarTareas();
+</script>
+
+</body>
+</html>
